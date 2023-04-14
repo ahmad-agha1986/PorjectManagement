@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "User Page";
+}
+<h1 class="welcome-msg">@ViewBag.UserName</h1>
+
+
+<div class="logout-button">
+    <a class="btn btn-primary" href="@Url.Action("Logout", "Account")">Logout</a>
+</div>
+
+
+<style>
+
+    .welcome-msg {
+        font-size: 15px;
+        position: absolute;
+        right: 10px;
+        top: 30px;
+        color: orangered;
+        font-style: italic;
+    }
+
+    .card {
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 0.25rem;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        transition: all 0.3s ease;
+    }
+
+        .card:hover {
+            border: 1px solid #007bff;
+            box-shadow: 0 0.5rem 1rem rgba(0, 123, 255, 0.5);
+        }
+
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-text {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+
+    .logout-button {
+        position: absolute;
+        right: 0;
+        top: 40px;
+        padding: 15px 25px;
+        font-size: 16px;
+    }
+
+    .text-center{
+        font-style:italic;
+        background:center;
+        color:slategrey;
+    }
+
+</style>
+
+<div class="container-fluid mt-4">
+    <h2 class="text-center mb-4"> User Dashboard</h2>
+    <div class="row">
+        <div class="col-lg-3 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Notifications</h5>
+                    <p class="card-text">Check for new Tasks.</p>
+                    <a href="@Url.Action("GetNotificationsView" , "User")" class="btn btn-primary">Go to Notifications</a>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="col-lg-3 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">My Tasks</h5>
+                    <p class="card-text">Check your Tasks.</p>
+                    <a href="@Url.Action("MyTasks", "User")" class="btn btn-primary">Go to Tasks</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"> Working hours</h5>
+                    <p class="card-text">Manage your working hours .</p>
+                    <a href="@Url.Action("AddWorkingHours", "User")" class="btn btn-primary">Add hours</a>
+                </div>
+            </div>
+        </div>
+       
+
+
+        <div class="col-lg-3 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Profile</h5>
+                    <p class="card-text">Update your profile.</p>
+                    <a href="@Url.Action("MyProfile", "User")" class="btn btn-primary">Update</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

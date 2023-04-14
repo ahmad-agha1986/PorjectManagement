@@ -1,0 +1,84 @@
+﻿@model string
+@using Newtonsoft.Json
+@{
+    var tasks = JsonConvert.DeserializeObject<List<dynamic>>(Model);
+}
+<div class="position-fixed top-0 start-0 mt-5 ms-3">
+    <a class="btn btn-primary btn-sm" href="@Url.Action("UserPage", "Account")">User Page</a>
+</div>
+
+@if (tasks.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Task Id</th>
+                <th>Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in tasks)
+            {
+                <tr>
+                    <td>@task.Task_Id</td>
+                    <td>@task.Name</td>
+                    <td>@task.StartDate</td>
+                    <td>@task.EndDate</td>
+                    <td>@task.Status</td>
+                    <td>
+                    <td>
+                            @if (task.Status != "Complete")
+                            {
+                            <form method="post" asp-controller="User" asp-action="UpdateTaskStatus" asp-route-id="@task.Task_Id">
+                                <button type="submit" class="btn btn-primary">Mark as Complete</button>
+                            </form>
+                            }
+                            else if (task.Status == "Complete")
+                            {
+                            <form method="post" asp-controller="User" asp-action="UpdateTaskStatus" asp-route-id="@task.Task_Id">
+                                <button type="submit" class="btn btn-primary">Mark as InProgress</button>
+                            </form>
+                            }
+                    </td>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h1>No Tasks to display.</h1>
+}
+
+<style>
+    .User-button {
+        position: absolute;
+        left: 0;
+        top: 40px;
+        padding: 10px 20px;
+        font-size: 15px;
+        color: #fff;
+    }
+
+    .btn-danger {
+        font-size: 16px;
+        padding: 10px 20px;
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-danger:hover,
+        .btn-danger:focus,
+        .btn-danger:active {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+</style>

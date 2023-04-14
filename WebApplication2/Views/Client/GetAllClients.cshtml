@@ -1,0 +1,104 @@
+﻿@model PaginationViewModel<Client>
+
+<head>
+    <link rel="stylesheet" href="~/css/Client/GetAllClients.css" />
+</head>
+
+
+
+<div class="position-fixed top-0 start-0 mt-5 ms-3">
+    <a class="btn btn-primary btn-sm" href="@Url.Action("AdminPage", "Account")">Admin Page</a>
+</div>
+
+<div class="position-fixed top-0 end-0 mt-5 me-3">
+    <a class="btn btn-primary btn-sm" href="@Url.Action("CreateClient", "Client")">Create Client</a>
+</div>
+
+<div class="d-flex justify-content-center">
+    <div class="search-container">
+        <form method="get" action="@Url.Action("GetAllClients")" class="form-inline mb-3">
+            <div class="input-group">
+                <input type="search" name="searchTerm" class="form-control form-control-sm" placeholder="Search by Id or Name">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary my-2 my-sm-0 search-button">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (Model.Items.Any())
+{
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr class="properties">
+                <th>Id</th>
+
+                <th>Name</th> 
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var client in Model.Items)
+            {
+                <tr>
+                    <td>@client.Client_Id</td>
+                    <td>@client.FirstName</td>
+                    <td>@client.Email</td>
+                    <td>@client.Phone</td>
+                    <td>@client.Address</td>
+                    <td>@client.City</td>
+                    <td>@client.State</td>
+                    <td>@client.Country</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="@Url.Action("EditClient", "Client", new { id = client.Client_Id, page = Model.PageIndex })">Edit</a>
+                    </td>
+                    <td>
+
+                        <a class="btn btn-primary" href="@Url.Action("DeleteClient", "Client", new { ClientId =client.Client_Id, page = Model.PageIndex})">Delete</a>
+                   
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <nav>
+        <ul class="pagination">
+            @{
+                var currentPage = Model.PageIndex;
+                var totalPages = Model.TotalPages;
+            }
+
+            @if (totalPages > 1)
+            {
+                <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("GetAllClients", new { page = currentPage - 1 })">Previous</a>
+                </li>
+
+                @for (int i = 1; i <= totalPages; i++)
+                {
+                    <li class="page-item @(currentPage == i ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("GetAllClients", new { page = i })">@i</a>
+                    </li>
+                }
+
+                <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("GetAllClients", new { page = currentPage + 1 })">Next</a>
+                </li>
+            }
+        </ul>
+    </nav>
+
+
+}
+else
+{
+    <p>No clients found.</p>
+}

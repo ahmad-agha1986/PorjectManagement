@@ -1,0 +1,109 @@
+﻿@model NotificationsViewModel
+@using Newtonsoft.Json
+@{
+    var notifications = Model.Notifications;
+    var userEmail = Model.UserEmail;
+    var userName = userEmail.Split("@")[0];
+}
+<div class="User-button">
+    <a class="btn btn-primary " href="@Url.Action("UserPage", "Account")">User Page</a>
+</div>
+
+<div class="container">
+    @*<h2>Welcome, @userName</h2>*@
+    <hr>
+
+    @if (notifications.Any())
+    {
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Notification Id</th>
+                    <th>Created At</th>
+                    <th>Message</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var notification in notifications)
+                {
+                    <tr>
+                        <td>@notification.NotificationId</td>
+                        <td>@notification.CreatedAt</td>
+                        <td>@notification.Message</td>
+                        <td>@notification.Type</td>
+                        <td>
+                            <form method="post" asp-action="DeleteNotification" asp-route-id="@notification.NotificationId">
+                                <button type="submit" class="btn btn-primary">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No notifications to display.</p>
+    }
+</div>
+
+
+    <style >
+
+    .User-button {
+        position: absolute;
+        left: 0;
+        top: 15px;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+    }
+
+  
+
+
+
+
+
+    body {
+        padding-top: 50px;
+        padding-bottom: 50px;
+        background-color: #f5f5f5;
+    }
+
+    .container {
+        max-width: 960px;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+    }
+
+    h2 {
+        margin-bottom: 1rem;
+        font-size: 36px;
+        font-family: Arial, sans-serif;
+        color: #333;
+        text-shadow: 2px 2px 2px #ccc;
+    }
+    
+
+    .table {
+        background-color: #e6f2ff;
+    }
+
+    th, td {
+        color: blue;
+    }
+
+   
+   
+
+
+</style>
+
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">

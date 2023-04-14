@@ -1,0 +1,24 @@
+﻿
+.card-footer {
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    border-top: none;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+input[type="submit"] {
+    margin-top: 20px;
+}
+
+form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+

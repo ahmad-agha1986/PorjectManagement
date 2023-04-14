@@ -1,0 +1,49 @@
+﻿@model List<WebApplication2.Models.TaskUserRecordViewModel>
+
+<h1>User Records</h1>
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>User Record Id</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Task Id</th>
+            <th>User Id</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var record in Model)
+        {
+            <tr>
+                <td>@record.UserRecords.UserRecord_Id</td>
+                <td>@record.UserRecords.Date?.ToShortDateString()</td>
+                <td>@record.UserRecords.StartTime</td>
+                <td>@record.UserRecords.EndTime</td>
+                <td>@record.Users.FirstName</td>
+                <td>@record.Users.LastName</td>
+                <td>@record.Tasks.Task_Id</td>
+                <td>@record.Users?.User_Id</td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    body {
+        padding: 20px;
+    }
+
+    table {
+        margin-top: 20px;
+    }
+
+    th, td {
+        text-align: center;
+    }
+</style>

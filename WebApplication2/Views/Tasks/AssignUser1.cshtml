@@ -1,0 +1,57 @@
+﻿
+@model AssignUserViewModel
+
+<head>
+    <link rel="stylesheet" href="~/css/Task/AssignUser1.css" />
+</head>
+
+
+@if (ViewData["Error"] != null)
+{
+    <div class="alert alert-danger">@ViewData["Error"]</div>
+}
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+
+            <h4>Please select a User to Assign to Task ID number : @Model.TaskId</h4>
+           
+            @*<form asp-controller="Tasks" asp-action="AssignUser" method="post" asp-route-TaskId="@Model.TaskId">*@
+                <form asp-action="AssignUser" asp-controller="Tasks"  method="post">
+                <input type="hidden" name="taskId" value="@Model.TaskId" />
+                    <input type="hidden" name="page" value="@ViewBag.PageIndex" />
+                <div class="form-group">
+                    <label for="user"></label>
+                    <select id="user" name="userId" class="form-control">
+                        <option value="">--Select User  --</option>
+                        @if (Model.EligibleUsers != null && Model.EligibleUsers.Count() > 0)
+                        {
+                            @foreach (var user in Model.EligibleUsers)
+                            {
+                                <option value="@user.Value">@user.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+               
+                <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Assign</button>
+                <a asp-action="TasksWithoutUsers" class="btn btn-primary ms-2">Cancel</a>
+                </div>
+               
+            </form>
+
+           @* @if (Model.EligibleUsers == null || Model.EligibleUsers.Count() == 0)
+            {
+                <div class="alert alert-danger mt-3" role="alert">
+                    There are no eligible users to assign to this task. Please add users to the system and try again.
+                </div>
+            }*@
+        </div>
+    </div>
+</div>
